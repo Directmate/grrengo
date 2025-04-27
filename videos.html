@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Video Lectures</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .video-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+        }
+
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .video-actions {
+            background-color: white;
+            padding: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .comment-section {
+            background-color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .card {
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Modified thumbnail styles */
+        .thumbnail-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .thumbnail-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1; /* Changed from 0 to 1 */
+        }
+
+        .thumbnail-container:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .play-icon {
+            color: white;
+            font-size: 48px;
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .stats-icon {
+            margin-right: 15px;
+            color: #666;
+        }
+
+        .btn-watch {
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-watch:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">Agriculture Video Lectures</h1>
+    
+    <div class="row g-4">
+        <!-- Video Card 1 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100">
+                <div class="thumbnail-container">
+                    <img src="images/vdoimg1.jpg" class="card-img-top" alt="Organic Farming">
+                    <div class="thumbnail-overlay">
+                        <i class="fas fa-play-circle play-icon"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Organic Farming Techniques</h5>
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="stats-icon"><i class="fas fa-eye"></i> 1.2K</span>
+                        <span class="stats-icon"><i class="fas fa-heart"></i> 245</span>
+                        <span class="stats-icon"><i class="fas fa-comment"></i> 45</span>
+                        <span class="stats-icon"><i class="fas fa-share"></i> 30</span>
+                    </div>
+                    <p class="text-muted">Posted on: Jan 25, 2025</p>
+                    <button class="btn btn-watch text-white w-100" onclick="openVideo(1)">Watch Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100">
+                <div class="thumbnail-container">
+                    <img src="images/vdoimg2.jpg" class="card-img-top" alt="Sustainable Irrigation">
+                    <div class="thumbnail-overlay">
+                        <i class="fas fa-play-circle play-icon"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Sustainable Irrigation Methods</h5>
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="stats-icon"><i class="fas fa-eye"></i> 985</span>
+                        <span class="stats-icon"><i class="fas fa-heart"></i> 180</span>
+                        <span class="stats-icon"><i class="fas fa-comment"></i> 32</span>
+                        <span class="stats-icon"><i class="fas fa-share"></i> 25</span>
+                    </div>
+                    <p class="text-muted">Posted on: Jan 28, 2025</p>
+                    <button class="btn btn-watch text-white w-100" onclick="openVideo(2)">Watch Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100">
+                <div class="thumbnail-container">
+                    <img src="images/vdoimg3.jpg" class="card-img-top" alt="Crop Rotation">
+                    <div class="thumbnail-overlay">
+                        <i class="fas fa-play-circle play-icon"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Crop Rotation Benefits</h5>
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="stats-icon"><i class="fas fa-eye"></i> 756</span>
+                        <span class="stats-icon"><i class="fas fa-heart"></i> 156</span>
+                        <span class="stats-icon"><i class="fas fa-comment"></i> 28</span>
+                        <span class="stats-icon"><i class="fas fa-share"></i> 20</span>
+                    </div>
+                    <p class="text-muted">Posted on: Jan 29, 2025</p>
+                    <button class="btn btn-watch text-white w-100" onclick="openVideo(3)">Watch Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video Overlay -->
+<div class="video-overlay" id="videoOverlay">
+    <div class="video-container">
+        <div class="close-btn" onclick="closeVideo()"><i class="fas fa-times"></i></div>
+        <div class="ratio ratio-16x9">
+            <iframe id="videoFrame" src="" title="Video" allowfullscreen></iframe>
+        </div>
+        <div class="video-actions">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <button class="btn btn-outline-primary me-2"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="btn btn-outline-secondary me-2"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                    <button class="btn btn-outline-info"><i class="fas fa-share"></i> Share</button>
+                </div>
+                <div>
+                    <span class="me-3"><i class="fas fa-eye"></i> <span id="viewCount">0</span></span>
+                    <span><i class="fas fa-heart"></i> <span id="likeCount">0</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="comment-section">
+            <h5>Comments</h5>
+            <div class="mb-3">
+                <textarea class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                <button class="btn btn-primary mt-2">Post Comment</button>
+            </div>
+            <div id="comments">
+                <!-- Comments will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openVideo(videoId) {
+        const overlay = document.getElementById('videoOverlay');
+        const videoFrame = document.getElementById('videoFrame');
+        
+        const videoSources ={
+           
+            1: "videos/WhatsApp Video 2024-11-17 at 12.37.26_dfcdb4f6.mp4",
+            2: "videos/WhatsApp Video 2024-11-17 at 12.37.26_dfcdb4f6.mp4",
+            3: "videos/WhatsApp Video 2024-11-17 at 12.37.26_dfcdb4f6.mp4",
+
+        };
+
+        videoFrame.outerHTML = `
+        <video id="videoFrame" class="w-100" controls autoplay>
+            <source src="${videoSources[videoId]}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `;
+
+      overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+
+
+
+        // Set video source based on videoId
+        // Replace with actual video URLs
+
+        videoFrame.src = `https://www.youtube.com/embed/placeholder${videoId}`;
+        
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        
+        // Update view count (demo purposes)
+        document.getElementById('viewCount').textContent = Math.floor(Math.random() * 1000) + 500;
+        document.getElementById('likeCount').textContent = Math.floor(Math.random() * 200) + 100;
+    }
+
+    function closeVideo() {
+        const overlay = document.getElementById('videoOverlay');
+        const videoFrame = document.getElementById('videoFrame');
+        
+        videoFrame.src = '';
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+</script>
+</body>
+</html>

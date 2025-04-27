@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        .blog-card {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .blog-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-stats {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .modal-img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .blog-modal {
+            background-color: white;
+            margin: 50px auto;
+            max-width: 1000px;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .interaction-btn {
+            border: none;
+            background: none;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .interaction-btn:hover {
+            color: #2ecc71;
+        }
+
+        .interaction-btn.active {
+            color: #2ecc71;
+        }
+
+        .blog-date {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Agricultural Insights</h1>
+        
+        <div class="row g-4">
+            <!-- Blog 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card blog-card" onclick="openBlog('blog1')">
+                    <img src="images/blogimg1.jpg" class="card-img-top blog-img" alt="Sustainable Farming">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Modern Sustainable Farming </h4>
+                        <p class="card-text">Discover how modern technology is revolutionizing sustainable farming practices...</p>
+                        <div class="blog-stats d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-eye me-2"></i>1.2K views</span>
+                            <span><i class="far fa-calendar me-2"></i>Jan 25, 2025</span>
+                        </div>
+                        <button class="btn btn-outline-success mt-3">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card blog-card" onclick="openBlog('blog2')">
+                    <img src="images/blogimg2.jpg" class="card-img-top blog-img" alt="Organic Farming">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">The Rise of Organic Farming</h4>
+                        <p class="card-text">Exploring the growing trend of organic farming and its impact on food quality...</p>
+                        <div class="blog-stats d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-eye me-2"></i>2.5K views</span>
+                            <span><i class="far fa-calendar me-2"></i>Jan 27, 2025</span>
+                        </div>
+                        <button class="btn btn-outline-success mt-3">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card blog-card" onclick="openBlog('blog3')">
+                    <img src="images/blogimg3.jpg" class="card-img-top blog-img" alt="Smart Irrigation">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Smart Irrigation Systems</h4>
+                        <p class="card-text">How smart irrigation technology is helping farmers conserve water...</p>
+                        <div class="blog-stats d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-eye me-2"></i>1.8K views</span>
+                            <span><i class="far fa-calendar me-2"></i>Jan 28, 2025</span>
+                        </div>
+                        <button class="btn btn-outline-success mt-3">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Modal Overlay -->
+    <div class="overlay" id="blogOverlay">
+        <div class="blog-modal">
+            <i class="fas fa-times close-btn" onclick="closeBlog()"></i>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/api/placeholder/400/320" class="img-fluid modal-img" id="modalImage" alt="Blog Image">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-4" id="modalTitle"></h2>
+                    <p class="blog-date mb-4" id="modalDate"></p>
+                    <div id="modalContent"></div>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div>
+                            <button class="interaction-btn me-3" onclick="toggleLike(this)">
+                                <i class="far fa-thumbs-up me-1"></i>Like
+                            </button>
+                            <button class="interaction-btn me-3" onclick="toggleDislike(this)">
+                                <i class="far fa-thumbs-down me-1"></i>Dislike
+                            </button>
+                        </div>
+                        <button class="interaction-btn" onclick="shareBlog()">
+                            <i class="fas fa-share-alt me-1"></i>Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const blogContent = {
+            blog1: {
+                title: "Modern Sustainable Farming Practices",
+                image: "images/blogimg1.jpg",
+                date: "January 25, 2025",
+                content: `Modern sustainable farming is revolutionizing agriculture through innovative technologies and practices. This comprehensive approach combines traditional wisdom with cutting-edge solutions to maximize yields while minimizing environmental impact. Farmers are now employing precision agriculture techniques, utilizing IoT sensors, and implementing data-driven decision-making processes to optimize resource usage and increase productivity. The integration of artificial intelligence and machine learning has enabled better crop prediction and disease management, while sustainable practices such as crop rotation and natural pest control methods ensure long-term soil health and biodiversity...`
+            },
+            blog2: {
+                title: "The Rise of Organic Farming",
+                image: "images/blogimg2.jpg",
+                date: "January 27, 2025",
+                content: `Organic farming has seen unprecedented growth in recent years, driven by increasing consumer awareness and demand for chemical-free produce. This method of agriculture focuses on maintaining soil fertility through natural processes, promoting biodiversity, and ensuring animal welfare. Farmers are discovering that organic practices not only benefit the environment but can also lead to premium pricing for their products. The certification process, while rigorous, provides consumers with confidence in the quality and authenticity of organic products...`
+            },
+            blog3: {
+                title: "Smart Irrigation Systems",
+                image: "images/blogimg3.jpg",
+                date: "January 28, 2025",
+                content: `Smart irrigation systems are transforming water management in agriculture. These advanced systems use real-time data from soil moisture sensors, weather forecasts, and crop requirements to optimize irrigation scheduling. The technology enables farmers to reduce water waste while ensuring optimal crop growth. Features such as automated controls, mobile monitoring, and predictive analytics help farmers make informed decisions about water usage. The implementation of these systems has shown significant water savings while maintaining or improving crop yields...`
+            }
+        };
+
+        function openBlog(blogId) {
+            const blog = blogContent[blogId];
+            document.getElementById('modalTitle').textContent = blog.title;
+            document.getElementById('modalImage').src = blog.image;
+            document.getElementById('modalDate').textContent = blog.date;
+            document.getElementById('modalContent').textContent = blog.content;
+            document.getElementById('blogOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBlog() {
+            document.getElementById('blogOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleLike(button) {
+            button.classList.toggle('active');
+            const icon = button.querySelector('i');
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+        }
+
+        function toggleDislike(button) {
+            button.classList.toggle('active');
+            const icon = button.querySelector('i');
+            icon.classList.toggle('far');
+            icon.classList.toggle('fas');
+        }
+
+        function shareBlog() {
+            alert('Sharing functionality would be implemented here!');
+        }
+    </script>
+</body>
+</html>

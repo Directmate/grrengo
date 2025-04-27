@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Help Center</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #45a049;
+            --accent-color: #FFA500;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/400') center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .search-input {
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .faq-question i {
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            color: #666;
+            line-height: 1.6;
+            border-top: 1px solid #eee;
+        }
+
+        .active .faq-question i {
+            transform: rotate(90deg);
+        }
+
+        .active .faq-answer {
+            display: block;
+        }
+
+        .category-pills {
+            margin-bottom: 2rem;
+        }
+
+        .category-pill {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .floating-help {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .floating-help:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div>
+            <h1 class="display-4 mb-3">How can we help you?</h1>
+            <p class="lead">Find answers to common agriculture questions</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-box">
+            <input type="text" class="form-control search-input" placeholder="Search for your question..." id="searchInput">
+        </div>
+
+        <div class="category-pills d-flex flex-wrap justify-content-center">
+            <button class="category-pill active" data-category="all">All Questions</button>
+            <button class="category-pill" data-category="crop-management">Crop Management</button>
+            <button class="category-pill" data-category="pest-control">Pest Control</button>
+            <button class="category-pill" data-category="irrigation">Irrigation</button>
+            <button class="category-pill" data-category="soil-health">Soil Health</button>
+        </div>
+
+        <div class="faq-container">
+            <!-- Crop Management -->
+            <div class="faq-item" data-category="crop-management">
+                <div class="faq-question">
+                    <span>What are the best practices for crop rotation?</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Effective crop rotation involves:</p>
+                    <ul>
+                        <li>Alternating between different plant families</li>
+                        <li>Planning 3-4 year rotation cycles</li>
+                        <li>Considering nutrient needs of each crop</li>
+                        <li>Including cover crops in rotation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pest Control -->
+            <div class="faq-item" data-category="pest-control">
+                <div class="faq-question">
+                    <span>How do I control common garden pests naturally?</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Natural pest control methods include:</p>
+                    <ul>
+                        <li>Companion planting</li>
+                        <li>Introducing beneficial insects</li>
+                        <li>Using organic sprays like neem oil</li>
+                        <li>Maintaining healthy soil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Irrigation -->
+            <div class="faq-item" data-category="irrigation">
+                <div class="faq-question">
+                    <span>What are efficient irrigation methods for small farms?</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Efficient irrigation methods include:</p>
+                    <ul>
+                        <li>Drip irrigation systems</li>
+                        <li>Sprinkler systems with timers</li>
+                        <li>Rainwater harvesting</li>
+                        <li>Soil moisture monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Soil Health -->
+            <div class="faq-item" data-category="soil-health">
+                <div class="faq-question">
+                    <span>How can I improve my soil quality?</span>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Improve soil quality through:</p>
+                    <ul>
+                        <li>Regular soil testing</li>
+                        <li>Adding organic matter</li>
+                        <li>Using cover crops</li>
+                        <li>Proper pH management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Add more FAQ items for each category -->
+        </div>
+    </div>
+
+    <div class="floating-help">
+        <i class="fas fa-comment-dots fa-lg"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle FAQ answers
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Category filtering
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                // Remove active class from all pills
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                // Add active class to clicked pill
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (category === 'all') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = item.dataset.category === category ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

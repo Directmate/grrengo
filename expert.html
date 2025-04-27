@@ -1,0 +1,144 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Experts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        .expert-card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .expert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .expert-img {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .rating {
+            color: #ffd700;
+        }
+        
+        .book-btn {
+            background-color: #2ecc71;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .book-btn:hover {
+            background-color: #27ae60;
+            transform: scale(1.05);
+        }
+
+        .consultation-info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Our Agricultural Experts</h1>
+        
+        <div class="row g-4">
+            <!-- Expert 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card expert-card">
+                    <img src="images/agriexp2.jpg" class="card-img-top expert-img" alt="Dr. Sarah Johnson">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Dr. Sarah Johnson</h4>
+                        <p class="card-text flex-grow-1">Soil Science Specialist with 15 years of experience in sustainable farming practices. Expert in soil health management and organic farming techniques.</p>
+                        <p class="consultation-info">
+                            <i class="fas fa-clock me-2"></i>90-minute consultation
+                            <br>
+                            <i class="fas fa-video me-2"></i>Video call available
+                        </p>
+                        <div class="rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-2 text-muted">(4.5/5)</span>
+                        </div>
+                        <button class="btn book-btn text-white w-100" onclick="bookExpert('Dr. Sarah Johnson')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card expert-card">
+                    <img src="images/askexp3.jpg" class="card-img-top expert-img" alt="Dr. Michael Chen">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Dr. Michael Chen</h4>
+                        <p class="card-text flex-grow-1">Crop Disease Specialist focusing on integrated pest management and plant pathology. Pioneer in developing eco-friendly disease control methods.</p>
+                        <p class="consultation-info">
+                            <i class="fas fa-clock me-2"></i>50-minute consultation
+                            <br>
+                            <i class="fas fa-video me-2"></i>Video call available
+                            
+                        
+
+                        </p>
+                        <div class="rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="ms-2 text-muted">(5/5)</span>
+                        </div>
+                        <button class="btn book-btn text-white w-100" onclick="bookExpert('Dr. Michael Chen')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card expert-card">
+                    <img src="images/head-shot-woman-wearing-white-600nw-1529466836.webp" class="card-img-top expert-img" alt="Dr. Emma Rodriguez">
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title fw-bold">Dr. Emma Rodriguez</h4>
+                        <p class="card-text flex-grow-1">Agricultural Technology Expert specializing in precision farming and smart irrigation systems. Leading authority on AgTech solutions.</p>
+                        <p class="consultation-info">
+                            <i class="fas fa-clock me-2"></i>30-minute consultation
+                            <br>
+                            <i class="fas fa-video me-2"></i>Video call available
+                        </p>
+                        <div class="rating mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="ms-2 text-muted">(4/5)</span>
+                        </div>
+                        <button class="btn book-btn text-white w-100" onclick="bookExpert('Dr. Emma Rodriguez')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function bookExpert(expertName) {
+            alert(`Booking appointment with ${expertName}. Our team will contact you shortly!`);
+            // Here you can add more functionality like opening a modal form or redirecting to a booking page
+        }
+    </script>
+</body>
+</html>

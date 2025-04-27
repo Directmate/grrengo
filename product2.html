@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nativo Fungicide</title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .left {
+            flex: 1;
+            padding-right: 20px;
+            position: relative;
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .slides img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .navigation {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .right {
+            flex: 1;
+        }
+        .right h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .right .rating {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        .right .price {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .right .original-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+        .right .save {
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+        .right .offer {
+            background-color: #e0f7fa;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .right .variants {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .right .variant {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .right .variant:hover {
+            background-color: #f0f0f0;
+        }
+        .right .info {
+            margin-bottom: 10px;
+        }
+        .right .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .right .buttons button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .right .buttons .add-to-cart {
+            background-color: #ff9800;
+            color: white;
+        }
+        .right .buttons .add-to-cart:hover {
+            background-color: #e68900;
+        }
+        .right .buttons .buy-now {
+            background-color: #4caf50;
+            color: white;
+        }
+        .right .buttons .buy-now:hover {
+            background-color: #388e3c;
+        }
+        .container2 {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            margin: 20px auto;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .icon {
+            color: #007bff;
+        }
+        .variants {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .variant {
+            padding: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .variant:hover {
+            background-color: #f0f0f0;
+        }
+        /*table*/
+            table {
+                border-collapse: collapse;
+                width: 80%;
+                text-align: center;
+            }
+            th, td {
+                border: 1px solid #000;
+                padding: 8px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            caption {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            /*reviews*/
+
+        .review-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+        }
+        .overall-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .stars {
+            color: #FFD700;
+        }
+        .rating-summary {
+            margin-left: 10px;
+        }
+        .rating-breakdown {
+            margin-bottom: 20px;
+        }
+        .rating-breakdown div {
+            display: flex;
+            align-items: center;
+        }
+        .rating-bar {
+            background-color: #e0e0e0;
+            height: 10px;
+            width: 100%;
+            margin-left: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .bar-filled {
+            height: 10px;
+            background-color: #FFD700;
+        }
+        .review-button {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .review-item {
+            border-top: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .review-item:first-child {
+            border-top: none;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide"><img src="images/nativo.avif" alt="Nativo Fungicide 1"></div>
+                    <div class="slide"><img src="images/nativo.avif" alt="Nativo Fungicide 2"></div>
+                    <div class="slide"><img src="images/nativo.avif" alt="Nativo Fungicide 3"></div>
+                </div>
+            </div>
+            <div class="navigation">
+                <button class="btn prev">Prev</button>
+                <button class="btn next">Next</button>
+            </div>
+        </div>
+        <div class="right">
+            <h1>Nativo Fungicide</h1>
+            <div class="rating">4.57 stars (94 reviews)</div>
+            <div class="price">price ₹110 <span class="original-price">₹180</span></div>
+            <div class="save">Save ₹70 (39% off)</div>
+            <div class="offer">Get it for ₹106 with deals</div>
+            <div class="info">Inclusive of all taxes</div>
+            <div class="variants">
+                <div class="variant">10 gms: ₹110 (39% off)</div>
+                <div class="variant">1 kg: ₹6999 (32% off)</div>
+                <div class="variant">50 gms: ₹412 (37% off)</div>
+                <div class="variant">100 gms: ₹763 (36% off)</div>
+                <div class="variant">250 gms: ₹1821 (36% off)</div>
+                <div class="variant">500 gms: ₹3550 (34% off)</div>
+            </div>
+            <div class="info"><i class="fi fi-tr-earth-europa">&nbsp;Country of Origin: India</i></div>
+            <div class="info">Secure Payments</div>
+            <div class="info">In stock, Ready to Ship</div>
+            <div class="buttons">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    <div class="container2">
+        <h1>Product Description</h1>
+        <h2>About Product</h2>
+        <ul>
+            <li><strong>Nativo Fungicide</strong> is a new combination fungicide and controls fungal diseases in various crops.</li>
+            <li><strong>Nativo technical name - Tebuconazole 50%+ Trifloxystrobin 25% w/w WG (75 WG)</strong></li>
+            <li>It is a systemic broad-spectrum fungicide with protective and curative action.</li>
+            <li>It enhances crop quality and production.</li>
+            <li><strong>Nativo Fungicide</strong> demonstrates quick mesostemic action (good penetration and re-distribution).</li>
+        </ul>
+        <h2>Nativo Fungicide Technical Details</h2>
+        <ul>
+            <li><strong>Technical Content:</strong> Tebuconazole 50%+ Trifloxystrobin 25% w/w WG (75 WG)</li>
+            <li><strong>Mode of Entry:</strong> Protective and curative action entry</li>
+            <li><strong>Mode of Action:</strong> Tebuconazole is dimethylase inhibitor (DMI) - interferes in the process of building the structure of fungal cell wall. Finally, it inhibits the reproduction and further growth of fungus. Trifloxystrobin interferes with respiration in plant pathogenic fungi.</li>
+        </ul>
+        <h2>Key Features and Benefits</h2>
+        <ul>
+            <li><strong>Nativo Fungicide</strong> is a combination of two different modern modes of action - Excellent protective and curative activity due to Tebuconazole & protective action due to Trifloxystrobin.</li>
+            <li>Demonstrates mesostemic action (good penetration and re-distribution).</li>
+            <li>Gives broad spectrum control on targeted diseases, with flexibility in application time.</li>
+            <li>Excellent resistance management tool.</li>
+            <li>Provides stress tolerance to crops against biotic and abiotic factors.</li>
+            <li><strong>Nativo Fungicide</strong> enhances yield and improves milling quality.</li>
+        </ul>
+        <br>
+        <table>
+             <caption>Nativo Fungicide Usage and Crops</caption>
+            <thead>
+                <tr>
+                    <th>Recommended Crops</th>
+                    <th>Targeted Disease</th>
+                    <th>Dosage / Acre</th>
+                    <th>Dilution in Water</th>
+                    <th>Interval Between Last Application</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rice</td>
+                    <td>Sheath blight, leaf blast, neck blast, glume discoloration (dirty panicle)</td>
+                    <td>80 gm</td>
+                    <td>140-160 L</td>
+                    <td>21 days</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>False smut, brown leaf spot</td>
+                    <td>140-160 gm</td>
+                    <td>200 L</td>
+                    <td>35 days</td>
+                </tr>
+                <tr>
+                    <td>Grape</td>
+                    <td>Powdery mildew</td>
+                    <td>70 gm</td>
+                    <td>400 L</td>
+                    <td>34 days</td>
+                </tr>
+                <tr>
+                    <td>Chilli</td>
+                    <td>Anthracnose, Alternaria leaf spot, powdery mildew</td>
+                    <td>100 gm</td>
+                    <td>200 L</td>
+                    <td>5 days</td>
+                </tr>
+                <tr>
+                    <td>Wheat</td>
+                    <td>Yellow rust, powdery mildew</td>
+                    <td>120 gm</td>
+                    <td>120-200 L</td>
+                    <td>40 days</td>
+                </tr>
+                <tr>
+                    <td>Tomato</td>
+                    <td>Early blight</td>
+                    <td>140 gm</td>
+                    <td>200 L</td>
+                    <td>3 days</td>
+                </tr>
+                <tr>
+                    <td>Mango</td>
+                    <td>Anthracnose, powdery mildew</td>
+                    <td>75-100 gm</td>
+                    <td>100 L (Spray fluid as required depending on the size of tree)</td>
+                    <td>15 days</td>
+                </tr>
+                <tr>
+                    <td>Cotton</td>
+                    <td>Alternaria leaf spot</td>
+                    <td>120 gm</td>
+                    <td>200 L</td>
+                    <td>28 days</td>
+                </tr>
+                <tr>
+                    <td>Banana</td>
+                    <td>Sigatoka leaf spot</td>
+                    <td>140 gm</td>
+                    <td>300 L</td>
+                    <td>20 days</td>
+                </tr>
+                <tr>
+                    <td>Apple</td>
+                    <td>Premature leaf fall, powdery mildew</td>
+                    <td>40 gm</td>
+                    <td>100 L (Spray fluid as required depending on the size of tree)</td>
+                    <td>30 days</td>
+                </tr>
+                <tr>
+                    <td>Cabbage</td>
+                    <td>Alternaria leaf blight/ leaf spot</td>
+                    <td>120 gm</td>
+                    <td>200 L</td>
+                    <td>35 days</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="review-container" style="width: 100%;">
+        <div class="overall-rating">
+            <div class="stars">★★★★☆</div>
+            <div class="rating-summary">4.55 based on 94 ratings</div>
+        </div>
+        <div class="rating-breakdown">
+            <div>
+                5 stars
+                <div class="rating-bar"><div class="bar-filled" style="width: 81%;"></div></div>
+                81%
+            </div>
+            <div>
+                4 stars
+                <div class="rating-bar"><div class="bar-filled" style="width: 7%;"></div></div>
+                7%
+            </div>
+            <div>
+                3 stars
+                <div class="rating-bar"><div class="bar-filled" style="width: 3%;"></div></div>
+                3%
+            </div>
+            <div>
+                2 stars
+                <div class="rating-bar"><div class="bar-filled" style="width: 1%;"></div></div>
+                1%
+            </div>
+            <div>
+                1 star
+                <div class="rating-bar"><div class="bar-filled" style="width: 6%;"></div></div>
+                6%
+            </div>
+        </div>
+        <a href="#" class="review-button">Write a Product Review</a>
+        <div class="review-item">
+            <div class="review-header">
+                <span>BigHaat Farmer</span>
+                <span>★★★☆☆</span>
+                <span>15 January 2025</span>
+            </div>
+            <div>Ok</div>
+        </div>
+        <div class="review-item">
+            <div class="review-header">
+                <span>Verified Farmer</span>
+                <span>★★☆☆☆</span>
+                <span>04 January 2025</span>
+            </div>
+            <div>High price</div>
+        </div>
+        <div class="review-item">
+            <div class="review-header">
+                <span>Verified Farmer</span>
+                <span>★☆☆☆☆</span>
+                <span>27 December 2024</span>
+            </div>
+            <div>**Comment in another language**</div>
+        </div>
+        <div class="review-item">
+            <div class="review-header">
+                <span>Verified Farmer</span>
+                <span>★★★★☆</span>
+                <span>12 December 2024</span>
+            </div>
+            <div>Super</div>
+        </div>
+        <div class="review-item">
+            <div class="review-header">
+                <span>BigHaat Farmer</span>
+                <span>★★★★☆</span>
+                <span>04 December 2024</span>
+            </div>
+            <div>Good 4</div>
+        </div>
+        <div class="review-item">
+            <div class="review-header">
+                <span>Verified Farmer</span>
+                <span>★☆☆☆☆</span>
+                <span>12 November 2024</span>
+            </div>
+            <div>Don't purchase products from bighaat fake products</div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.querySelector('.next').addEventListener('click', function() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
+        });
+
+        document.querySelector('.prev').addEventListener('click', function() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.querySelector('.slides').style.transform = `translateX(-${currentSlide * 100}%)`;
+        });
+    </script>
+</body>
+</html>
